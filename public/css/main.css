@@ -1409,3 +1409,8 @@ main {
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%); }
+
+.page-not-found {
+  text-align: center;
+  margin-top: 50px;
+}
