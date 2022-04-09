@@ -19,6 +19,7 @@ type AppScreenProps = {
 
 function App(props: AppScreenProps): JSX.Element {
   const { promoFilmTitle, promoFilmGenre, promoFilmYear, catalogGenres, films } = props;
+  const filmId = films.map((film) => film.id);
 
   return (
     <BrowserRouter>
