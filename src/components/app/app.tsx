@@ -19,7 +19,6 @@ type AppScreenProps = {
 
 function App(props: AppScreenProps): JSX.Element {
   const { promoFilmTitle, promoFilmGenre, promoFilmYear, catalogGenres, films } = props;
-  const filmId = films.map((film) => film.id);
 
   return (
     <BrowserRouter>
@@ -39,11 +38,11 @@ function App(props: AppScreenProps): JSX.Element {
           path='/mylist'
           element={
             <PrivateRoute>
-              <MyList />
+              <MyList films={films}/>
             </PrivateRoute>
           }
         />
-        <Route path='/films/:id' element={<FilmScreen />} />
+        <Route path='/films/:id' element={<FilmScreen films={films} />} />
         <Route path='/films/:id/review' element={<AddReview />} />
         <Route path='/player/:id' element={<Player />} />
         <Route path='*' element={<PageNotFound />} />
