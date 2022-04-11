@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
+import { films } from './mocks/films';
 
 const CatalogGenres = [
-  {
-    href: 'all',
-    name: 'All genres',
-  },
+  'All genres',
+  'Comedies',
+  'Crime',
+  'Documentary',
+  'Dramas',
+  'Horror',
+  'Kids & Family',
+  'Romance',
+  'Sci-Fi',
+  'Thrillers',
 ];
 
 const Settings = {
@@ -23,6 +30,7 @@ ReactDOM.render(
       promoFilmGenre={Settings.GENRE}
       promoFilmYear={Settings.YEAR}
       catalogGenres={Settings.CATALOG_GENRES}
+      films={films}
     />
   </React.StrictMode>,
   document.getElementById('root'));

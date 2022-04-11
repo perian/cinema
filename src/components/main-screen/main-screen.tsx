@@ -1,19 +1,17 @@
 import React from 'react';
-import FilmCard from '../film/film';
-
-type Genre = {
-  href: string;
-  name: string;
-}
+import { Films } from '../../types/film';
+import FilmsList from '../films-list/films-list';
 
 type MainScreenProps = {
   promoFilmTitle: string;
   promoFilmGenre: string;
   promoFilmYear: number;
-  catalogGenres: Genre[];
+  catalogGenres: string[];
+  films: Films;
 }
 
-function MainScreen({promoFilmTitle, promoFilmGenre, promoFilmYear, catalogGenres}: MainScreenProps): JSX.Element {
+function MainScreen(props: MainScreenProps): JSX.Element {
+  const { promoFilmTitle, promoFilmGenre, promoFilmYear, catalogGenres, films } = props;
 
   return (
     <React.Fragment>
@@ -86,7 +84,7 @@ function MainScreen({promoFilmTitle, promoFilmGenre, promoFilmYear, catalogGenre
               <a href="#" className="catalog__genres-link">All genres</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
+              <a href="#" className="catalog__genres-link">{catalogGenres[1]}</a>
             </li>
             <li className="catalog__genres-item">
               <a href="#" className="catalog__genres-link">Crime</a>
@@ -114,9 +112,7 @@ function MainScreen({promoFilmTitle, promoFilmGenre, promoFilmYear, catalogGenre
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            <FilmCard />
-          </div>
+          <FilmsList films={films}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
