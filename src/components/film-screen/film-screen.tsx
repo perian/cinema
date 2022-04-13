@@ -1,6 +1,7 @@
 import React from 'react';
-import { Route, useNavigate, useParams } from 'react-router-dom';
+import { Link, Route, useNavigate, useParams } from 'react-router-dom';
 import { Films } from '../../types/film';
+import { getFilmById } from '../../utils/films';
 import PageNotFound from '../page-not-found/page-not-found';
 
 type FilmScreenProps = {
@@ -12,7 +13,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
   const { id } = useParams() as { id: string };
   const navigate = useNavigate();
 
-  const film = films.find((f) => f.id === parseInt(id, 10));
+  const film = getFilmById(films, id);
 
   if (!film) {
     return <Route path='*' element={<PageNotFound />} />;
@@ -22,7 +23,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
         <section className="film-card film-card--full">
           <div className="film-card__hero">
             <div className="film-card__bg">
-              <img src="img/bg-the-grand-budapest-hotel.jpg" alt={film.name} />
+              <img src={film.backgroundImage} alt={film.name} />
             </div>
 
             <h1 className="visually-hidden">WTW</h1>
@@ -52,7 +53,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
               <div className="film-card__desc">
                 <h2 className="film-card__title">{film.name}</h2>
                 <p className="film-card__meta">
-                  <span className="film-card__genre">Drama</span>
+                  <span className="film-card__genre">{film.genre}</span>
                   <span className="film-card__year">{film.released}</span>
                 </p>
 
@@ -69,7 +70,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
                     </svg>
                     <span>My list</span>
                   </button>
-                  <a href="add-review.html" className="btn film-card__button">Add review</a>
+                  <Link to="review" className="btn film-card__button">Add review</Link>
                 </div>
               </div>
             </div>
@@ -78,7 +79,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
           <div className="film-card__wrap film-card__translate-top">
             <div className="film-card__info">
               <div className="film-card__poster film-card__poster--big">
-                <img src="img/the-grand-budapest-hotel-poster.jpg" alt={`${film.name} poster`} width="218" height="327" />
+                <img src={film.posterImage} alt={`${film.name} poster`} width="218" height="327" />
               </div>
 
               <div className="film-card__desc">
@@ -169,7 +170,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
             </div>
 
             <div className="copyright">
-              <p>© 2019 What to watch Ltd.</p>
+              <p>© 2022 What to watch Ltd.</p>
             </div>
           </footer>
         </div>
