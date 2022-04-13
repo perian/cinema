@@ -3,6 +3,7 @@ import { Films } from '../../types/film';
 import { getFilmById } from '../../utils/films';
 import { pathToFilm } from '../../utils/routes';
 import { AppRoutes } from '../../routes/routes';
+import SubmitReview from './submit-review';
 
 type AddReviewProps = {
   films: Films;
@@ -99,13 +100,7 @@ function AddReview(props: AddReviewProps): JSX.Element {
               </div>
             </div>
 
-            <div className="add-review__text">
-              <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
-              <div className="add-review__submit">
-                <button className="add-review__btn" type="submit">Post</button>
-              </div>
-
-            </div>
+            <SubmitReview />
           </form>
         </div>
 

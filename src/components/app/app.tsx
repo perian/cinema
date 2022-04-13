@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AddReview from '../add-review/add-review';
+import AddReview from '../review/add-review';
 import MainScreen from '../main-screen/main-screen';
 import MyList from '../my-list/my-list';
 import PageNotFound from '../page-not-found/page-not-found';
