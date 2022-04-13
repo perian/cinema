@@ -1,7 +1,8 @@
-import { Route, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { Films } from '../../types/film';
 import { getFilmById } from '../../utils/films';
-import PageNotFound from '../page-not-found/page-not-found';
+import { pathToFilm } from '../../utils/routes';
+import { AppRoutes } from '../../routes/routes';
 
 type AddReviewProps = {
   films: Films;
@@ -13,7 +14,8 @@ function AddReview(props: AddReviewProps): JSX.Element {
   const film = getFilmById(films, id);
 
   if (!film) {
-    return <Route path='*' element={<PageNotFound />} />;
+    return <Navigate to='*' />;
+
   } else {
     return (
       <section className="film-card film-card--full">
@@ -26,17 +28,17 @@ function AddReview(props: AddReviewProps): JSX.Element {
 
           <header className="page-header">
             <div className="logo">
-              <a href="/" className="logo__link">
+              <Link to={AppRoutes.Main} className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a href="film-page.html" className="breadcrumbs__link">{film.name}</a>
+                  <Link to={pathToFilm(film.id)} className="breadcrumbs__link">{film.name}</Link>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>
@@ -51,7 +53,7 @@ function AddReview(props: AddReviewProps): JSX.Element {
                 </div>
               </li>
               <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
+                <Link to="#" className="user-block__link">Sign out</Link>
               </li>
             </ul>
           </header>
@@ -71,7 +73,7 @@ function AddReview(props: AddReviewProps): JSX.Element {
                 <input className="rating__input" id="star-9" type="radio" name="rating" value="9" />
                 <label className="rating__label" htmlFor="star-9">Rating 9</label>
 
-                <input className="rating__input" id="star-8" type="radio" name="rating" value="8" checked />
+                <input className="rating__input" id="star-8" type="radio" name="rating" value="8" defaultChecked />
                 <label className="rating__label" htmlFor="star-8">Rating 8</label>
 
                 <input className="rating__input" id="star-7" type="radio" name="rating" value="7" />

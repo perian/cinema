@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Film } from '../../types/film';
+import { pathToFilm } from '../../utils/routes';
 
 type FilmCardProps = {
   film: Film;
@@ -23,14 +24,14 @@ function FilmCard(props: FilmCardProps): JSX.Element {
       data-id={film.name}
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
-      onClick={() => navigate(`/films/${film.id}`)}
+      onClick={() => navigate(pathToFilm(film.id))}
     >
       <div className="small-film-card__image">
         <img src={film.previewImage} alt={film.name} width="280" height="175" />
 
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${film.id}`} >
+        <Link to={pathToFilm(film.id)} className="small-film-card__link" >
           {film.name}
         </Link>
       </h3>

@@ -6,9 +6,9 @@ import PageNotFound from '../page-not-found/page-not-found';
 import Player from '../player/player';
 import PrivateRoute from '../private-route/private-route';
 import SignIn from '../sign-in/sign-in';
-
 import { Films } from '../../types/film';
 import FilmScreen from '../film-screen/film-screen';
+import { AppRoutes } from '../../routes/routes';
 
 type AppScreenProps = {
   promoFilmTitle: string;
@@ -34,18 +34,18 @@ function App(props: AppScreenProps): JSX.Element {
           />
         }
         />
-        <Route path='/login' element={<SignIn />} />
+        <Route path={AppRoutes.SignIn} element={<SignIn />} />
         <Route
-          path='/mylist'
+          path={AppRoutes.MyList}
           element={
             <PrivateRoute>
               <MyList films={films} />
             </PrivateRoute>
           }
         />
-        <Route path='/films/:id' element={<FilmScreen films={films} />} />
-        <Route path='/films/:id/review' element={<AddReview films={films} />} />
-        <Route path='/player/:id' element={<Player films={films} />} />
+        <Route path={AppRoutes.Film} element={<FilmScreen films={films} />} />
+        <Route path={AppRoutes.AddReview} element={<AddReview films={films} />} />
+        <Route path={AppRoutes.Player} element={<Player films={films} />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

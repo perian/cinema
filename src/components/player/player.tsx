@@ -1,8 +1,7 @@
 import moment from 'moment';
-import { Route, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { Films } from '../../types/film';
 import { getFilmById } from '../../utils/films';
-import PageNotFound from '../page-not-found/page-not-found';
 
 type PlayerProps = {
   films: Films;
@@ -20,7 +19,7 @@ function Player(props: PlayerProps): JSX.Element {
       : moment.utc(seconds * 1000).format('HH:mm:ss');
 
   if (!film) {
-    return <Route path='*' element={<PageNotFound />} />;
+    return <Navigate to='*' />;
   } else {
     const runTime = formattedRunTime(film.runTime);
 
