@@ -1,5 +1,5 @@
 import { generatePath } from 'react-router-dom';
-import { AppRoutes } from '../routes/routes';
+import { AppRoutes } from '../const';
 
 export function pathToFilm(id: string | number) {
   return generatePath(AppRoutes.Film, { id: id.toString()});

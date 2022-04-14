@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AppRoutes } from '../../routes/routes';
+import { AppRoutes } from '../../const';
 
 function SignIn(): JSX.Element {
   return (

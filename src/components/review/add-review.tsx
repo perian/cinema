@@ -2,7 +2,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { Films } from '../../types/film';
 import { getFilmById } from '../../utils/films';
 import { pathToFilm } from '../../utils/routes';
-import { AppRoutes } from '../../routes/routes';
+import { AppRoutes } from '../../const';
 import SubmitReview from './submit-review';
 
 type AddReviewProps = {

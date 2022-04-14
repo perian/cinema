@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
-import { AppRoutes } from '../../routes/routes';
+import { AppRoutes } from '../../const';
 import { Films } from '../../types/film';
 import { getFilmById } from '../../utils/films';
 import { pathToAddReview } from '../../utils/routes';

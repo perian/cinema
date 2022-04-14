@@ -8,7 +8,7 @@ import PrivateRoute from '../private-route/private-route';
 import SignIn from '../sign-in/sign-in';
 import { Films } from '../../types/film';
 import FilmScreen from '../film-screen/film-screen';
-import { AppRoutes } from '../../routes/routes';
+import { AppRoutes } from '../../const';
 
 type AppScreenProps = {
   promoFilmTitle: string;
