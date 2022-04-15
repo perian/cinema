@@ -1,7 +1,9 @@
 import React from 'react';
-import { Route, useNavigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
+import { AppRoutes } from '../../const';
 import { Films } from '../../types/film';
-import PageNotFound from '../page-not-found/page-not-found';
+import { getFilmById } from '../../utils/films';
+import { pathToAddReview } from '../../utils/routes';
 
 type FilmScreenProps = {
   films: Films;
@@ -12,28 +14,28 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
   const { id } = useParams() as { id: string };
   const navigate = useNavigate();
 
-  const film = films.find((f) => f.id === parseInt(id, 10));
+  const film = getFilmById(films, id);
 
   if (!film) {
-    return <Route path='*' element={<PageNotFound />} />;
+    return <Navigate to='*' />;
   } else {
     return (
       <React.Fragment>
         <section className="film-card film-card--full">
           <div className="film-card__hero">
             <div className="film-card__bg">
-              <img src="img/bg-the-grand-budapest-hotel.jpg" alt={film.name} />
+              <img src={film.backgroundImage} alt={film.name} />
             </div>
 
             <h1 className="visually-hidden">WTW</h1>
 
             <header className="page-header film-card__head">
               <div className="logo">
-                <a href="main.html" className="logo__link">
+                <Link to={AppRoutes.Main} className="logo__link">
                   <span className="logo__letter logo__letter--1">W</span>
                   <span className="logo__letter logo__letter--2">T</span>
                   <span className="logo__letter logo__letter--3">W</span>
-                </a>
+                </Link>
               </div>
 
               <ul className="user-block">
@@ -43,7 +45,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
                   </div>
                 </li>
                 <li className="user-block__item">
-                  <a className="user-block__link">Sign out</a>
+                  <Link to="#" className="user-block__link">Sign out</Link>
                 </li>
               </ul>
             </header>
@@ -52,7 +54,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
               <div className="film-card__desc">
                 <h2 className="film-card__title">{film.name}</h2>
                 <p className="film-card__meta">
-                  <span className="film-card__genre">Drama</span>
+                  <span className="film-card__genre">{film.genre}</span>
                   <span className="film-card__year">{film.released}</span>
                 </p>
 
@@ -69,7 +71,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
                     </svg>
                     <span>My list</span>
                   </button>
-                  <a href="add-review.html" className="btn film-card__button">Add review</a>
+                  <Link to={pathToAddReview(film.id)} className="btn film-card__button">Add review</Link>
                 </div>
               </div>
             </div>
@@ -78,20 +80,20 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
           <div className="film-card__wrap film-card__translate-top">
             <div className="film-card__info">
               <div className="film-card__poster film-card__poster--big">
-                <img src="img/the-grand-budapest-hotel-poster.jpg" alt={`${film.name} poster`} width="218" height="327" />
+                <img src={film.posterImage} alt={`${film.name} poster`} width="218" height="327" />
               </div>
 
               <div className="film-card__desc">
                 <nav className="film-nav film-card__nav">
                   <ul className="film-nav__list">
                     <li className="film-nav__item film-nav__item--active">
-                      <a href="#" className="film-nav__link">Overview</a>
+                      <Link to="#" className="film-nav__link">Overview</Link>
                     </li>
                     <li className="film-nav__item">
-                      <a href="#" className="film-nav__link">Details</a>
+                      <Link to="#" className="film-nav__link">Details</Link>
                     </li>
                     <li className="film-nav__item">
-                      <a href="#" className="film-nav__link">Reviews</a>
+                      <Link to="#" className="film-nav__link">Reviews</Link>
                     </li>
                   </ul>
                 </nav>
@@ -161,15 +163,15 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
 
           <footer className="page-footer">
             <div className="logo">
-              <a href="main.html" className="logo__link logo__link--light">
+              <Link to={AppRoutes.Main} className="logo__link logo__link--light">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <div className="copyright">
-              <p>© 2019 What to watch Ltd.</p>
+              <p>© 2022 What to watch Ltd.</p>
             </div>
           </footer>
         </div>
