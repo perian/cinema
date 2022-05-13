@@ -9,14 +9,20 @@ type PlayerProps = {
 
 function Player(props: PlayerProps): JSX.Element {
   const { films } = props;
-  const { id } = useParams() as { id: string };
-  const film = getFilmById(films, id);
+  const { id } = useParams();
   const navigate = useNavigate();
   const BACK = -1;
   const formattedRunTime = (seconds: number): string =>
     seconds < 3600
       ? moment.utc(seconds * 1000).format('mm:ss')
       : moment.utc(seconds * 1000).format('HH:mm:ss');
+
+  if (id === undefined) {
+    // console.error('id is undefined for some reason');
+    return <Navigate to='*' />;
+  }
+
+  const film = getFilmById(films, id);
 
   if (!film) {
     return <Navigate to='*' />;
