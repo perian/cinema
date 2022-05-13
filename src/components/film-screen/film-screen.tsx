@@ -11,8 +11,13 @@ type FilmScreenProps = {
 
 function FilmScreen(props: FilmScreenProps): JSX.Element {
   const { films } = props;
-  const { id } = useParams() as { id: string };
+  const { id } = useParams();
   const navigate = useNavigate();
+
+  if (id === undefined) {
+    // console.error('id is undefined for some reason');
+    return <Navigate to='*' />;
+  }
 
   const film = getFilmById(films, id);
 

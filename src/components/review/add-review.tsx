@@ -11,7 +11,13 @@ type AddReviewProps = {
 
 function AddReview(props: AddReviewProps): JSX.Element {
   const { films } = props;
-  const { id } = useParams() as { id: string };
+  const { id } = useParams();
+
+  if (id === undefined) {
+    // console.error('id is undefined for some reason');
+    return <Navigate to='*' />;
+  }
+
   const film = getFilmById(films, id);
 
   if (!film) {
