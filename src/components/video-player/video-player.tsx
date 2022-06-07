@@ -1,15 +1,42 @@
+import { createRef, useEffect } from 'react';
+
 type VideoPLayerProps = {
-  poster: string,
+  posterImg: string,
   videoLink: string
+  shouldVideoStarts: boolean
 }
 
 function VideoPLayer(props: VideoPLayerProps): JSX.Element {
-  const { poster, videoLink } = props;
+  const { posterImg, videoLink, shouldVideoStarts } = props;
+  const videoRef = createRef<HTMLVideoElement>();
+  const VIDEO_PREVIEW_START_DELAY = 1000;
+
+  useEffect(() => {
+    let previewTimeout: NodeJS.Timeout;
+
+    if (shouldVideoStarts) {
+      previewTimeout = setTimeout(() => videoRef.current?.play(), VIDEO_PREVIEW_START_DELAY);
+      return;
+    }
+
+    videoRef.current?.load();
+
+    return () => clearTimeout(previewTimeout);
+
+  }, [shouldVideoStarts, videoRef]);
 
   return (
-    <video className="small-film-card__image" width="280" height="175" poster={poster} preload="none" loop playsInline muted>
-
-      <source src={videoLink} type="video/mp4"/>
+    <video
+      width="280"
+      height="175"
+      ref={videoRef}
+      poster={posterImg}
+      preload="none"
+      loop
+      playsInline
+      muted
+    >
+      <source src={videoLink} type="video/mp4" />
 
       <p>Sorry, your browser doesn&apos;t support embedded videos.</p>
     </video>
