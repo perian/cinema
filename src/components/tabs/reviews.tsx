@@ -1,34 +1,30 @@
-import moment from 'moment';
 import { CommentsGet } from '../../types/comment';
+import Review from './review';
 
 type ReviewsProps = {
   comments: CommentsGet
 }
 
+const spliceComments = (array: CommentsGet) => {
+  const spliceCommentsIndex = Math.ceil(array.length / 2);
+  const firstColumnOfComments = [...array].slice(0, spliceCommentsIndex);
+  const secondColumnOfComments = [...array].slice(spliceCommentsIndex, array.length);
+
+  return [firstColumnOfComments, secondColumnOfComments];
+};
+
 function Reviews({ comments }: ReviewsProps): JSX.Element {
   return (
     <div className="film-card__reviews film-card__row">
-      <div className="film-card__reviews-col">
-        {comments.map((comment) => {
-          const { id, comment: commentText, user, date, rating } = comment;
-          const formattedDate = moment(date).format('MMMM D, YYYY');
+      {spliceComments(comments).map((commentsColumn, index) => {
+        const columnIndex = index;
 
-          return (
-            <div className="review" key={id}>
-              <blockquote key={id} className="review__quote">
-                <p className="review__text">{commentText}</p>
-
-                <footer className="review__details">
-                  <cite key={user.id} className="review__author">{user.name}</cite>
-                  <time className="review__date" dateTime={date}>{formattedDate}</time>
-                </footer>
-              </blockquote>
-
-              <div className="review__rating">{rating}</div>
-            </div>
-          );
-        })}
-      </div>
+        return (
+          <div className="film-card__reviews-col" key={Math.random() + columnIndex}>
+            {commentsColumn.map((comment) => <Review key={comment.id} comment={comment} />)}
+          </div>
+        );
+      })}
     </div>
   );
 }
