@@ -6,3 +6,5 @@ export enum AppRoutes {
   AddReview = '/films/:id/review',
   Player = '/player/:id'
 }
+
+export const ALL_GENRES = 'All genres';

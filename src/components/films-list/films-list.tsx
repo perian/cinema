@@ -1,27 +1,42 @@
 import { useState } from 'react';
 import { Film, Films } from '../../types/film';
+import { filterFilmByGenre } from '../../utils/films';
 import FilmCard from '../film-card/film-card';
 
-type FilmListProps = {
-  films: Films;
+type FilmsListProps = {
+  films: Films,
+  filmsLimit?: number,
+  filterByGenre?: string,
 }
 
-function FilmsList(props: FilmListProps): JSX.Element {
-  const { films } = props;
-
+function FilmsList({ films, filterByGenre, filmsLimit }: FilmsListProps): JSX.Element {
   const [, setActiveFilm] = useState<Film | null>(null);
 
-  const changeActiveFilm = (film:Film | null) => {
-    setActiveFilm(film);
-  };
-
-  const filmsList = films.map((film) => <FilmCard key={film.id} film={film} setActiveFilm={changeActiveFilm} />);
+  const filmsList =
+    filterFilmByGenre(films, filterByGenre)
+      .map((film) => <FilmCard key={film.id} film={film} setActiveFilm={setActiveFilm} />);
 
   return (
     <div className="catalog__films-list">
-      {filmsList}
+      {filmsLimit
+        ? filmsList.slice(0, filmsLimit)
+        : filmsList}
     </div>
   );
 }
 
 export default FilmsList;
+
+
+/**
+ *
+  const filterFilmByGenre = (films: Films, filterByGenre: string, ) => {
+    if (filterByGenre === ALL_GENRES) {
+      return films;
+    }
+
+    return films.filter((film) => film.genre === filterByGenre);
+  }
+
+  filterFilmByGenre(films, filterByGenre);
+ */

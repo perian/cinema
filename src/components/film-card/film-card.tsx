@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Film } from '../../types/film';
 import { pathToFilm } from '../../utils/routes';
+import VideoPLayer from '../video-player/video-player';
 
 type FilmCardProps = {
   film: Film;
@@ -10,13 +12,16 @@ type FilmCardProps = {
 function FilmCard(props: FilmCardProps): JSX.Element {
   const { film, setActiveFilm } = props;
   const navigate = useNavigate();
+  const [shouldVideoStarts, setShouldVideoStarts] = useState(false);
 
   const onMouseOver = () => {
     setActiveFilm(film);
+    setShouldVideoStarts(true);
   };
 
   const onMouseOut = () => {
     setActiveFilm(null);
+    setShouldVideoStarts(false);
   };
 
   return (
@@ -26,10 +31,11 @@ function FilmCard(props: FilmCardProps): JSX.Element {
       onMouseOut={onMouseOut}
       onClick={() => navigate(pathToFilm(film.id))}
     >
-      <div className="small-film-card__image">
-        <img src={film.previewImage} alt={film.name} width="280" height="175" />
-
-      </div>
+      <VideoPLayer
+        posterImg={film.previewImage}
+        videoLink={film.videoLink}
+        shouldVideoStarts={shouldVideoStarts}
+      />
       <h3 className="small-film-card__title">
         <Link to={pathToFilm(film.id)} className="small-film-card__link" >
           {film.name}

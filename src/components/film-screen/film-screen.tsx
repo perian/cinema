@@ -4,18 +4,20 @@ import { AppRoutes } from '../../const';
 import { Films } from '../../types/film';
 import { getFilmById } from '../../utils/films';
 import { pathToAddReview } from '../../utils/routes';
+import FilmsList from '../films-list/films-list';
+import Tabs from '../tabs/tabs';
 
 type FilmScreenProps = {
   films: Films;
 };
 
-function FilmScreen(props: FilmScreenProps): JSX.Element {
-  const { films } = props;
+function FilmScreen({films}: FilmScreenProps): JSX.Element {
   const { id } = useParams();
   const navigate = useNavigate();
 
   if (id === undefined) {
-    // console.error('id is undefined for some reason');
+    // eslint-disable-next-line no-console
+    console.error('id is undefined for some reason');
     return <Navigate to='*' />;
   }
 
@@ -88,37 +90,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
                 <img src={film.posterImage} alt={`${film.name} poster`} width="218" height="327" />
               </div>
 
-              <div className="film-card__desc">
-                <nav className="film-nav film-card__nav">
-                  <ul className="film-nav__list">
-                    <li className="film-nav__item film-nav__item--active">
-                      <Link to="#" className="film-nav__link">Overview</Link>
-                    </li>
-                    <li className="film-nav__item">
-                      <Link to="#" className="film-nav__link">Details</Link>
-                    </li>
-                    <li className="film-nav__item">
-                      <Link to="#" className="film-nav__link">Reviews</Link>
-                    </li>
-                  </ul>
-                </nav>
-
-                <div className="film-rating">
-                  <div className="film-rating__score">{film.rating}</div>
-                  <p className="film-rating__meta">
-                    <span className="film-rating__level">Very good</span>
-                    <span className="film-rating__count">{film.scoresCount} ratings</span>
-                  </p>
-                </div>
-
-                <div className="film-card__text">
-                  <p>{film.description}</p>
-
-                  <p className="film-card__director"><strong>Director: {film.director}</strong></p>
-
-                  <p className="film-card__starring"><strong>Starring: {film.starring.join(', ')} and other</strong></p>
-                </div>
-              </div>
+              <Tabs film={film}/>
             </div>
           </div>
         </section>
@@ -128,41 +100,7 @@ function FilmScreen(props: FilmScreenProps): JSX.Element {
             <h2 className="catalog__title">More like this</h2>
 
             <div className="catalog__films-list">
-              <article className="small-film-card catalog__films-card">
-                <div className="small-film-card__image">
-                  <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-                </div>
-                <h3 className="small-film-card__title">
-                  <a className="small-film-card__link" href="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-                </h3>
-              </article>
-
-              <article className="small-film-card catalog__films-card">
-                <div className="small-film-card__image">
-                  <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-                </div>
-                <h3 className="small-film-card__title">
-                  <a className="small-film-card__link" href="film-page.html">Bohemian Rhapsody</a>
-                </h3>
-              </article>
-
-              <article className="small-film-card catalog__films-card">
-                <div className="small-film-card__image">
-                  <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-                </div>
-                <h3 className="small-film-card__title">
-                  <a className="small-film-card__link" href="film-page.html">Macbeth</a>
-                </h3>
-              </article>
-
-              <article className="small-film-card catalog__films-card">
-                <div className="small-film-card__image">
-                  <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-                </div>
-                <h3 className="small-film-card__title">
-                  <a className="small-film-card__link" href="film-page.html">Aviator</a>
-                </h3>
-              </article>
+              <FilmsList films={films} filterByGenre={film.genre} filmsLimit={4} />
             </div>
           </section>
 
