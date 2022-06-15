@@ -23,7 +23,7 @@ export const films: Films = [
   {
     id: 2,
     name: 'Bohemian Rhapsody',
-    genre: 'Drama',
+    genre: 'Horror',
     posterImage: 'img/bohemian-rhapsody-poster.jpg',
     previewImage: 'img/bohemian-rhapsody.jpg',
     backgroundImage: 'img/bg-bohemian-rhapsody.jpg',
@@ -41,7 +41,7 @@ export const films: Films = [
   }, {
     id: 3,
     name: 'Dardjeeling Limited',
-    genre: 'Drama',
+    genre: 'Horror',
     posterImage: './img/dardjeeling-limited-poster',
     previewImage: 'img/dardjeeling-limited.jpg',
     backgroundImage: 'img/bg-dardjeeling-limited.jpg',
@@ -59,7 +59,7 @@ export const films: Films = [
   }, {
     id:4,
     name: 'Fantastic beasts the crimes of Grindelwald',
-    genre: 'Drama',
+    genre: 'Horror',
     posterImage: 'img/fantastic-beasts-the-crimes-of-grindelwald-poster.jpg',
     previewImage: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',
     backgroundImage: 'img/bg-fantastic-beasts-the-crimes-of-grindelwald.jpg',
@@ -77,7 +77,7 @@ export const films: Films = [
   }, {
     id: 5,
     name: 'Seven years in Tibet',
-    genre: 'Drama',
+    genre: 'Comedy',
     posterImage: 'img/moonrise-kingdom-poster.jpg',
     previewImage: 'img/seven-years-in-tibet.jpg',
     backgroundImage: 'img/bg-seven-years-in-tibet.jpg',
@@ -95,7 +95,7 @@ export const films: Films = [
   }, {
     id: 6,
     name: 'Macbeth',
-    genre: 'Drama',
+    genre: 'Comedy',
     posterImage: 'img/Macbeth-poster.jpg',
     previewImage: 'img/Macbeth.jpg',
     backgroundImage: 'img/bg-Macbeth.jpg',

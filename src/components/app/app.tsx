@@ -14,12 +14,11 @@ type AppScreenProps = {
   promoFilmTitle: string;
   promoFilmGenre: string;
   promoFilmYear: number;
-  catalogGenres: string[];
   films: Films;
 }
 
 function App(props: AppScreenProps): JSX.Element {
-  const { promoFilmTitle, promoFilmGenre, promoFilmYear, catalogGenres, films } = props;
+  const { promoFilmTitle, promoFilmGenre, promoFilmYear, films } = props;
 
   return (
     <BrowserRouter>
@@ -29,7 +28,6 @@ function App(props: AppScreenProps): JSX.Element {
             promoFilmTitle={promoFilmTitle}
             promoFilmGenre={promoFilmGenre}
             promoFilmYear={promoFilmYear}
-            catalogGenres={catalogGenres}
             films={films}
           />
         }
