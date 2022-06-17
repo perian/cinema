@@ -1,13 +1,12 @@
-import { createReducer } from "@reduxjs/toolkit";
-import { composeWithDevTools } from "@reduxjs/toolkit/dist/devtoolsExtension";
-import { ALL_GENRES } from "../const";
-import { films } from "../mocks/films";
-import { getFilms, setActiveGenre } from "./actions";
+import { createReducer } from '@reduxjs/toolkit';
+import { ALL_GENRES } from '../const';
+import { films } from '../mocks/films';
+import { getFilms, setActiveGenre } from './actions';
 
-export let initialState = {
+export const initialState = {
   activeGenre: ALL_GENRES,
   films: films,
-}
+};
 
 export const reducer = createReducer(initialState, (builder) => {
   builder
@@ -16,5 +15,5 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getFilms, (state) => {
       state.films = films;
-    })
+    });
 });

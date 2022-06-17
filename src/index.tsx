@@ -1,5 +1,5 @@
 import { createStore } from '@reduxjs/toolkit';
-import { composeWithDevTools } from '@reduxjs/toolkit/dist/devtoolsExtension';
+import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
