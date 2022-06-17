@@ -26,7 +26,7 @@ export const getFilmsGenres = (films: Films) => {
   return [ALL_GENRES, ...genresList];
 };
 
-export const filterFilmByGenre = (films: Films, filterByGenre: string = ALL_GENRES ) => {
+export const filterFilmsByGenre = (films: Films, filterByGenre: string = ALL_GENRES ) => {
   if (filterByGenre === ALL_GENRES) {
     return films;
   }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Film, Films } from '../../types/film';
-import { filterFilmByGenre } from '../../utils/films';
+import { filterFilmsByGenre } from '../../utils/films';
 import FilmCard from '../film-card/film-card';
 
 type FilmsListProps = {
@@ -13,7 +13,7 @@ function FilmsList({ films, filterByGenre, filmsLimit }: FilmsListProps): JSX.El
   const [, setActiveFilm] = useState<Film | null>(null);
 
   const filmsList =
-    filterFilmByGenre(films, filterByGenre)
+    filterFilmsByGenre(films, filterByGenre)
       .map((film) => <FilmCard key={film.id} film={film} setActiveFilm={setActiveFilm} />);
 
   return (
