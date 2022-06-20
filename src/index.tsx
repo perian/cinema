@@ -1,19 +1,15 @@
-import { createStore } from '@reduxjs/toolkit';
-import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './components/app/app';
 import { films } from './mocks/films';
-import { reducer } from './store/reducer';
+import { store } from './store';
 
 const Settings = {
   PROMO: 'The Grand Budapest Hotel',
   GENRE: 'Drama',
   YEAR: 2014,
 };
-
-const store = createStore(reducer, composeWithDevTools());
 
 ReactDOM.render(
   <React.StrictMode>
