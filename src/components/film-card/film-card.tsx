@@ -6,22 +6,18 @@ import VideoPLayer from '../video-player/video-player';
 
 type FilmCardProps = {
   film: Film;
-  setActiveFilm: (film: Film | null) => void;
 }
 
-function FilmCard(props: FilmCardProps): JSX.Element {
-  const { film, setActiveFilm } = props;
+function FilmCard({ film }: FilmCardProps): JSX.Element {
   const navigate = useNavigate();
-  const [shouldVideoStarts, setShouldVideoStarts] = useState(false);
+  const [shouldFilmPreviewStarts, setShouldFilmPreviewStarts] = useState(false);
 
   const onMouseOver = () => {
-    setActiveFilm(film);
-    setShouldVideoStarts(true);
+    setShouldFilmPreviewStarts(true);
   };
 
   const onMouseOut = () => {
-    setActiveFilm(null);
-    setShouldVideoStarts(false);
+    setShouldFilmPreviewStarts(false);
   };
 
   return (
@@ -34,7 +30,7 @@ function FilmCard(props: FilmCardProps): JSX.Element {
       <VideoPLayer
         posterImg={film.previewImage}
         videoLink={film.videoLink}
-        shouldVideoStarts={shouldVideoStarts}
+        shouldFilmPreviewStarts={shouldFilmPreviewStarts}
       />
       <h3 className="small-film-card__title">
         <Link to={pathToFilm(film.id)} className="small-film-card__link" >
