@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ALL_GENRES } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setCurrentGenre } from '../../store/filmSlice';
 import { Films } from '../../types/film';
-import { getFilmsGenres } from '../../utils/films';
+import { getGenresOfAvailableFilms } from '../../utils/films';
 import FilmsList from '../films-list/films-list';
 
 type MainScreenProps = {
@@ -13,8 +14,8 @@ type MainScreenProps = {
 }
 
 function MainScreen({ promoFilmTitle, promoFilmGenre, promoFilmYear, films }: MainScreenProps): JSX.Element {
-  // const [activeFilter, setActiveFilter] = useState(ALL_GENRES);
-  const [filterByGenre, setFilterByGenre] = useState(ALL_GENRES);
+  const currentGenre = useAppSelector((state) => state.currentGenre);
+  const dispatch = useAppDispatch();
 
   return (
     <React.Fragment>
@@ -83,14 +84,14 @@ function MainScreen({ promoFilmTitle, promoFilmGenre, promoFilmYear, films }: Ma
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <ul className="catalog__genres-list">
-            {getFilmsGenres(films).map((genre) => (
-              <li className={`catalog__genres-item ${filterByGenre === genre ? 'catalog__genres-item--active' : ''}`} key={genre}>
+            {getGenresOfAvailableFilms(films).map((genre) => (
+              <li className={`catalog__genres-item ${currentGenre === genre ? 'catalog__genres-item--active' : ''}`} key={genre}>
                 <a
                   className="catalog__genres-link"
                   href="#"
                   onClick={(evt) => {
                     evt.preventDefault();
-                    setFilterByGenre(genre);
+                    dispatch(setCurrentGenre(genre));
                   }}
                 >
                   {genre}
@@ -99,7 +100,7 @@ function MainScreen({ promoFilmTitle, promoFilmGenre, promoFilmYear, films }: Ma
             ))}
           </ul>
 
-          <FilmsList films={films} filmsLimit={8} filterByGenre={filterByGenre} />
+          <FilmsList films={films} filmsLimit={8} genre={currentGenre} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

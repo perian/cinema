@@ -20,7 +20,7 @@ export const convertRatingToText = (rating: number): string | null => {
   return null;
 };
 
-export const getFilmsGenres = (films: Films) => {
+export const getGenresOfAvailableFilms = (films: Films) => {
   const genresList = new Set(films.map((film) => film.genre));
 
   return [ALL_GENRES, ...genresList];
