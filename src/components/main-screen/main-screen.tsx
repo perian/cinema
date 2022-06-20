@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setCurrentGenre } from '../../store/filmSlice';
 import { Films } from '../../types/film';
-import { getGenresOfAvailableFilms } from '../../utils/films';
 import FilmsList from '../films-list/films-list';
+import { useAppSelector } from '../../hooks';
+import GenresList from '../genres-list/genres-list';
 
 type MainScreenProps = {
   promoFilmTitle: string;
@@ -15,7 +14,6 @@ type MainScreenProps = {
 
 function MainScreen({ promoFilmTitle, promoFilmGenre, promoFilmYear, films }: MainScreenProps): JSX.Element {
   const currentGenre = useAppSelector((state) => state.currentGenre);
-  const dispatch = useAppDispatch();
 
   return (
     <React.Fragment>
@@ -83,24 +81,9 @@ function MainScreen({ promoFilmTitle, promoFilmGenre, promoFilmYear, films }: Ma
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            {getGenresOfAvailableFilms(films).map((genre) => (
-              <li className={`catalog__genres-item ${currentGenre === genre ? 'catalog__genres-item--active' : ''}`} key={genre}>
-                <a
-                  className="catalog__genres-link"
-                  href="#"
-                  onClick={(evt) => {
-                    evt.preventDefault();
-                    dispatch(setCurrentGenre(genre));
-                  }}
-                >
-                  {genre}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <GenresList films={films} currentGenre={currentGenre} />
 
-          <FilmsList films={films} filmsLimit={8} genre={currentGenre} />
+          <FilmsList films={films} filmsLimit={8} currentGenre={currentGenre} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

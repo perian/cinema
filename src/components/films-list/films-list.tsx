@@ -5,11 +5,11 @@ import FilmCard from '../film-card/film-card';
 type FilmsListProps = {
   films: Films,
   filmsLimit?: number,
-  genre?: string,
+  currentGenre?: string,
 }
 
-function FilmsList({ films, genre, filmsLimit }: FilmsListProps): JSX.Element {
-  const filmsList = filterFilmsByGenre(films, genre)
+function FilmsList({ films, currentGenre, filmsLimit }: FilmsListProps): JSX.Element {
+  const filmsList = filterFilmsByGenre(films, currentGenre)
     .map((film) => <FilmCard key={film.id} film={film} />);
 
   return (
