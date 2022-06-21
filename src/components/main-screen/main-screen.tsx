@@ -83,11 +83,7 @@ function MainScreen({ promoFilmTitle, promoFilmGenre, promoFilmYear, films }: Ma
 
           <GenresList films={films} currentGenre={currentGenre} />
 
-          <FilmsList films={films} filmsLimit={8} currentGenre={currentGenre} />
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <FilmsList films={films} currentGenre={currentGenre} />
         </section>
 
         <footer className="page-footer">
