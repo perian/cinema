@@ -1,16 +1,17 @@
+import { FILM_CARDS_AMOUNT_TO_RENDER } from '../../const';
+
 type FilmsProps = {
-  setMaxFilmsToRender: any,
+  setMaxFilmCardsToRender: any,
 }
 
-function ShowMore({ setMaxFilmsToRender }: FilmsProps) {
-  // const SHOW_MORE_FILMS_MAX = 8;
+function ShowMore({ setMaxFilmCardsToRender }: FilmsProps) {
 
   return (
     <div className="catalog__more">
       <button
         className="catalog__button"
         type="button"
-        onClick={() => setMaxFilmsToRender((prevState: number) => (prevState + 8))}
+        onClick={() => setMaxFilmCardsToRender((prevState: number) => (prevState += FILM_CARDS_AMOUNT_TO_RENDER))}
       >
         Show more
       </button>

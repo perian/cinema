@@ -8,3 +8,4 @@ export enum AppRoutes {
 }
 
 export const ALL_GENRES = 'All genres';
+export const FILM_CARDS_AMOUNT_TO_RENDER = 8;

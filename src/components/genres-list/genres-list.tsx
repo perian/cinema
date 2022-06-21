@@ -1,7 +1,7 @@
 import { getGenresOfAvailableFilms } from '../../utils/films';
 import { useAppDispatch } from '../../hooks';
 import { Films } from '../../types/film';
-import { setCurrentGenre } from '../../store/filmSlice';
+import { getFilmsFilteredByGenre, setCurrentGenre } from '../../store/filmSlice';
 
 type GenresListProps = {
   films: Films;
@@ -21,6 +21,7 @@ function GenresList({ films, currentGenre }: GenresListProps): JSX.Element {
             onClick={(evt) => {
               evt.preventDefault();
               dispatch(setCurrentGenre(genre));
+              dispatch(getFilmsFilteredByGenre());
             }}
           >
             {genre}

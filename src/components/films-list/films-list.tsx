@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { FILM_CARDS_AMOUNT_TO_RENDER } from '../../const';
+import { useAppSelector } from '../../hooks';
 import { Films } from '../../types/film';
-import { filterFilmsByGenre } from '../../utils/films';
 import FilmCard from '../film-card/film-card';
 import ShowMore from '../show-more/show-more';
 
@@ -10,12 +11,11 @@ type FilmsListProps = {
 }
 
 function FilmsList({ films, currentGenre }: FilmsListProps): JSX.Element {
-  const [maxFilmsToRender, setMaxFilmsToRender] = useState(8);
-  const filteredFilms = filterFilmsByGenre(films, currentGenre);
-
+  const [maxFilmCardsToRender, setMaxFilmCardsToRender] = useState(FILM_CARDS_AMOUNT_TO_RENDER);
+  const filteredFilms = useAppSelector((state) => state.filteredFilms);
   const filmsToRender = filteredFilms
     .map((film) => <FilmCard key={film.id} film={film} />)
-    .slice(0, maxFilmsToRender);
+    .slice(0, maxFilmCardsToRender);
 
   return (
     <React.Fragment>
@@ -24,7 +24,7 @@ function FilmsList({ films, currentGenre }: FilmsListProps): JSX.Element {
       </div>
 
       {filteredFilms.length > filmsToRender.length
-        ? <ShowMore setMaxFilmsToRender={setMaxFilmsToRender} />
+        ? <ShowMore setMaxFilmCardsToRender={setMaxFilmCardsToRender} />
         : null}
     </React.Fragment>
   );
