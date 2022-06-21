@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ALL_GENRES } from '../../const';
 import { Films } from '../../types/film';
-import { getFilmsGenres } from '../../utils/films';
 import FilmsList from '../films-list/films-list';
+import { useAppSelector } from '../../hooks';
+import GenresList from '../genres-list/genres-list';
 
 type MainScreenProps = {
   promoFilmTitle: string;
@@ -13,8 +13,7 @@ type MainScreenProps = {
 }
 
 function MainScreen({ promoFilmTitle, promoFilmGenre, promoFilmYear, films }: MainScreenProps): JSX.Element {
-  // const [activeFilter, setActiveFilter] = useState(ALL_GENRES);
-  const [filterByGenre, setFilterByGenre] = useState(ALL_GENRES);
+  const currentGenre = useAppSelector((state) => state.currentGenre);
 
   return (
     <React.Fragment>
@@ -82,28 +81,9 @@ function MainScreen({ promoFilmTitle, promoFilmGenre, promoFilmYear, films }: Ma
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            {getFilmsGenres(films).map((genre) => (
-              <li className={`catalog__genres-item ${filterByGenre === genre ? 'catalog__genres-item--active' : ''}`} key={genre}>
-                <a
-                  className="catalog__genres-link"
-                  href="#"
-                  onClick={(evt) => {
-                    evt.preventDefault();
-                    setFilterByGenre(genre);
-                  }}
-                >
-                  {genre}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <GenresList films={films} currentGenre={currentGenre} />
 
-          <FilmsList films={films} filmsLimit={8} filterByGenre={filterByGenre} />
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <FilmsList films={films} currentGenre={currentGenre} />
         </section>
 
         <footer className="page-footer">

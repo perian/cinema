@@ -20,16 +20,8 @@ export const convertRatingToText = (rating: number): string | null => {
   return null;
 };
 
-export const getFilmsGenres = (films: Films) => {
+export const getGenresOfAvailableFilms = (films: Films) => {
   const genresList = new Set(films.map((film) => film.genre));
 
   return [ALL_GENRES, ...genresList];
-};
-
-export const filterFilmByGenre = (films: Films, filterByGenre: string = ALL_GENRES ) => {
-  if (filterByGenre === ALL_GENRES) {
-    return films;
-  }
-
-  return films.filter((film) => film.genre === filterByGenre);
 };

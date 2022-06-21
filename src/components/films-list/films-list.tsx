@@ -1,42 +1,33 @@
-import { useState } from 'react';
-import { Film, Films } from '../../types/film';
-import { filterFilmByGenre } from '../../utils/films';
+import React, { useState } from 'react';
+import { FILM_CARDS_AMOUNT_TO_RENDER } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { Films } from '../../types/film';
 import FilmCard from '../film-card/film-card';
+import ShowMore from '../show-more/show-more';
 
 type FilmsListProps = {
   films: Films,
-  filmsLimit?: number,
-  filterByGenre?: string,
+  currentGenre?: string,
 }
 
-function FilmsList({ films, filterByGenre, filmsLimit }: FilmsListProps): JSX.Element {
-  const [, setActiveFilm] = useState<Film | null>(null);
-
-  const filmsList =
-    filterFilmByGenre(films, filterByGenre)
-      .map((film) => <FilmCard key={film.id} film={film} setActiveFilm={setActiveFilm} />);
+function FilmsList({ films, currentGenre }: FilmsListProps): JSX.Element {
+  const [maxFilmCardsToRender, setMaxFilmCardsToRender] = useState(FILM_CARDS_AMOUNT_TO_RENDER);
+  const filteredFilms = useAppSelector((state) => state.filteredFilms);
+  const filmsToRender = filteredFilms
+    .map((film) => <FilmCard key={film.id} film={film} />)
+    .slice(0, maxFilmCardsToRender);
 
   return (
-    <div className="catalog__films-list">
-      {filmsLimit
-        ? filmsList.slice(0, filmsLimit)
-        : filmsList}
-    </div>
+    <React.Fragment>
+      <div className="catalog__films-list">
+        {filmsToRender}
+      </div>
+
+      {filteredFilms.length > filmsToRender.length
+        ? <ShowMore setMaxFilmCardsToRender={setMaxFilmCardsToRender} />
+        : null}
+    </React.Fragment>
   );
 }
 
 export default FilmsList;
-
-
-/**
- *
-  const filterFilmByGenre = (films: Films, filterByGenre: string, ) => {
-    if (filterByGenre === ALL_GENRES) {
-      return films;
-    }
-
-    return films.filter((film) => film.genre === filterByGenre);
-  }
-
-  filterFilmByGenre(films, filterByGenre);
- */

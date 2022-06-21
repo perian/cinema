@@ -3,18 +3,18 @@ import { createRef, useEffect } from 'react';
 type VideoPLayerProps = {
   posterImg: string,
   videoLink: string
-  shouldVideoStarts: boolean
+  shouldFilmPreviewStarts: boolean
 }
 
 function VideoPLayer(props: VideoPLayerProps): JSX.Element {
-  const { posterImg, videoLink, shouldVideoStarts } = props;
+  const { posterImg, videoLink, shouldFilmPreviewStarts } = props;
   const videoRef = createRef<HTMLVideoElement>();
   const VIDEO_PREVIEW_START_DELAY = 1000;
 
   useEffect(() => {
     let previewTimeout: NodeJS.Timeout;
 
-    if (shouldVideoStarts) {
+    if (shouldFilmPreviewStarts) {
       previewTimeout = setTimeout(() => videoRef.current?.play(), VIDEO_PREVIEW_START_DELAY);
       return;
     }
@@ -23,7 +23,7 @@ function VideoPLayer(props: VideoPLayerProps): JSX.Element {
 
     return () => clearTimeout(previewTimeout);
 
-  }, [shouldVideoStarts, videoRef]);
+  }, [shouldFilmPreviewStarts, videoRef]);
 
   return (
     <video

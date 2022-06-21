@@ -100,7 +100,7 @@ function FilmScreen({films}: FilmScreenProps): JSX.Element {
             <h2 className="catalog__title">More like this</h2>
 
             <div className="catalog__films-list">
-              <FilmsList films={films} filterByGenre={film.genre} filmsLimit={4} />
+              <FilmsList films={films} currentGenre={film.genre} />
             </div>
           </section>
 
