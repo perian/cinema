@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { FILM_CARDS_AMOUNT_TO_RENDER } from '../../const';
 import { useAppSelector } from '../../hooks';
-import { Films } from '../../types/film';
 import FilmCard from '../film-card/film-card';
 import ShowMore from '../show-more/show-more';
 
 type FilmsListProps = {
-  films: Films,
   currentGenre?: string,
 }
 
-function FilmsList({ films, currentGenre }: FilmsListProps): JSX.Element {
+function FilmsList({ currentGenre }: FilmsListProps): JSX.Element {
   const [maxFilmCardsToRender, setMaxFilmCardsToRender] = useState(FILM_CARDS_AMOUNT_TO_RENDER);
   const filteredFilms = useAppSelector((state) => state.filteredFilms);
   const filmsToRender = filteredFilms
