@@ -1,14 +1,8 @@
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../const';
-import { Films } from '../../types/film';
 import FilmsList from '../films-list/films-list';
 
-type MyListProps = {
-  films: Films;
-}
-
-function MyList(props: MyListProps): JSX.Element {
-  const { films } = props;
+function MyList(): JSX.Element {
 
   return (
     <div className="user-page">
@@ -38,9 +32,7 @@ function MyList(props: MyListProps): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <div className="catalog__films-list">
-          <FilmsList films={films}/>
-        </div>
+        <FilmsList />
       </section>
 
       <footer className="page-footer">

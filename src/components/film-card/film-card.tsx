@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
+import { getFilmsFilteredByGenre, setCurrentGenre } from '../../store/filmSlice';
 import { Film } from '../../types/film';
 import { pathToFilm } from '../../utils/routes';
 import VideoPLayer from '../video-player/video-player';
@@ -10,22 +12,27 @@ type FilmCardProps = {
 
 function FilmCard({ film }: FilmCardProps): JSX.Element {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [shouldFilmPreviewStarts, setShouldFilmPreviewStarts] = useState(false);
 
-  const onMouseOver = () => {
+  const filmPreviewStars = () => {
     setShouldFilmPreviewStarts(true);
   };
 
-  const onMouseOut = () => {
+  const filmPreviewStops = () => {
     setShouldFilmPreviewStarts(false);
   };
 
   return (
     <article className="small-film-card catalog__films-card"
       data-id={film.name}
-      onMouseOver={onMouseOver}
-      onMouseOut={onMouseOut}
-      onClick={() => navigate(pathToFilm(film.id))}
+      onMouseOver={filmPreviewStars}
+      onMouseOut={filmPreviewStops}
+      onClick={() => {
+        navigate(pathToFilm(film.id));
+        dispatch(setCurrentGenre(film.genre));
+        dispatch(getFilmsFilteredByGenre());
+      }}
     >
       <VideoPLayer
         posterImg={film.previewImage}

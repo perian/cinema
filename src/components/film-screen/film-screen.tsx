@@ -11,7 +11,7 @@ type FilmScreenProps = {
   films: Films;
 };
 
-function FilmScreen({films}: FilmScreenProps): JSX.Element {
+function FilmScreen({ films }: FilmScreenProps): JSX.Element {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -90,7 +90,7 @@ function FilmScreen({films}: FilmScreenProps): JSX.Element {
                 <img src={film.posterImage} alt={`${film.name} poster`} width="218" height="327" />
               </div>
 
-              <Tabs film={film}/>
+              <Tabs film={film} />
             </div>
           </div>
         </section>
@@ -99,9 +99,7 @@ function FilmScreen({films}: FilmScreenProps): JSX.Element {
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
 
-            <div className="catalog__films-list">
-              <FilmsList films={films} currentGenre={film.genre} />
-            </div>
+            <FilmsList currentGenre={film.genre} />
           </section>
 
           <footer className="page-footer">

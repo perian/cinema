@@ -83,7 +83,7 @@ function MainScreen({ promoFilmTitle, promoFilmGenre, promoFilmYear, films }: Ma
 
           <GenresList films={films} currentGenre={currentGenre} />
 
-          <FilmsList films={films} currentGenre={currentGenre} />
+          <FilmsList currentGenre={currentGenre} />
         </section>
 
         <footer className="page-footer">
